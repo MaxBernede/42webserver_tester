@@ -1,5 +1,6 @@
 # **42 WEBSERV TESTER**
 
+# **This is a fork of someone else tester, I just modified it, do not want the credit :)**
 This is a simple python tester built upon [@tommarx](https://github.com/t0mm4rx/webserv/tree/main/tests)'s and [@hygioni](https://github.com/hygoni/webserv_tester)'s. It will test:
 
 - RFC: request line syntax checking, headers,
