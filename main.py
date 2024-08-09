@@ -67,11 +67,30 @@ def run() -> None:
     # run_test("GET  /  HTTP/1.1", test_request_line_multiple_space)
     # run_test("GET /{A*10^10} HTTP/1.1", test_request_line_too_long) #Take a while to load
 
+    # Checking if header is \r\n ? could be a check ?
     # print(r"{}{}### Headers ###{}".format(C_B_WHITE, B_GRAY, RESET))
     # run_test("GET / HTTP/1.1\\r\\nHost :", test_space_before_colon)
     # run_test("GET / HTTP/1.1\\r\\nempty:", test_missing_header_name)
     # run_test("GET / HTTP/1.1\\r\\n: empty", test_missing_header_data)
-    run_test("GET / HTTP/1.1\\r\\nUser-Agent: {A*10^11}", test_header_too_long)
+    # run_test("GET / HTTP/1.1\\r\\nvaluewithnocolon", test_missing_header_colon)
+    # run_test("GET / HTTP/1.1\\r\\nUser-Agent: {A*10^11}", test_header_too_long)
+
+    run_test("Testing mandatory headers", test_headers)
+    # run_test("Testing protected realm", test_auth_no_key)
+    # run_test("Testing protected realm access", test_auth)
+    # run_test("Testing case insensitive", test_case_insensitive)
+    # print(r"{}1. testing host header:{}".format(C_CYAN, RESET))
+    # run_test("GET / HTTP/1.1\\r\\n\\r\\n", test_missing_host)
+    # run_test("Host: naver.com\\r\\nHost: hyeyoo.com", test_double_host)
+    # run_test("Host: xxx\\r\\nHost: xxx", test_multiple_host)
+    # run_test("Host: hyeyoo@hyeyoo.com", test_invalid_host)
+    # print(r"{}2. testing content-length header{}".format(C_CYAN, RESET))
+    # run_test("Content-Length: -1", test_neg_content_length)
+    # run_test("Content-Length: 10^20", test_big_content_length)
+    # run_test("Content-Length: NOTDIGIT", test_alpha_content_length)
+    # run_test("Content-Length & Chunked", test_length_and_chunked)
+    # run_test("Content-Length * 2", test_double_length)
+
 
     # print(r"{}{}### TESTING ERROR ###{}".format(C_B_WHITE, B_GRAY, RESET))
     # run_test("HEAD /", test_head)
@@ -126,22 +145,7 @@ def run() -> None:
     # run_test("PUT /post/test, DELETE /post/test", test_delete)
     # run_test("DELETE /post/gone", test_delete_no_file)
 
-    # print(r"{}{}### TESTING HEADERS ###{}".format(C_B_WHITE, B_GRAY, RESET))
-    # run_test("Testing mandatory headers", test_headers)
-    # run_test("Testing protected realm", test_auth_no_key)
-    # run_test("Testing protected realm access", test_auth)
-    # run_test("Testing case insensitive", test_case_insensitive)
-    # print(r"{}1. testing host header:{}".format(C_CYAN, RESET))
-    # run_test("GET / HTTP/1.1\\r\\n\\r\\n", test_missing_host)
-    # run_test("Host: naver.com\\r\\nHost: hyeyoo.com", test_double_host)
-    # run_test("Host: xxx\\r\\nHost: xxx", test_multiple_host)
-    # run_test("Host: hyeyoo@hyeyoo.com", test_invalid_host)
-    # print(r"{}2. testing content-length header{}".format(C_CYAN, RESET))
-    # run_test("Content-Length: -1", test_neg_content_length)
-    # run_test("Content-Length: 10^20", test_big_content_length)
-    # run_test("Content-Length: NOTDIGIT", test_alpha_content_length)
-    # run_test("Content-Length & Chunked", test_length_and_chunked)
-    # run_test("Content-Length * 2", test_double_length)
+
 
 
 if __name__ == "__main__":
