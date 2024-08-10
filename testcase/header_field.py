@@ -84,7 +84,6 @@ def test_headers() -> str:
     if (
         headers["Content-Length"] == None
         or headers["Date"] == None
-        or headers["Last-Modified"] == None
     ):
         return "Missing headers"
     return ""

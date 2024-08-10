@@ -27,14 +27,37 @@ def test_get() -> str:
     req = requests.get(get_base_url())
     if req.status_code != 200:
         return "Bad status code."
-    if req.text != "hello world":
-        return "Bad content."
-    if req.headers["Content-Length"] != "11":
-        return "Bad Content-Length"
-    if req.headers["Content-Type"] != "text/html":
-        return "Bad Content-Length"
+    
+    with open('documents/index.html', 'r') as file:
+        if req.text != file.read():
+            return "Bad content."
+    
+    if req.headers.get("Content-Length") != str(len(req.text)):
+        return "Bad Content-Length."
+    if req.headers.get("Content-Type") != "text/html; charset=UTF-8":
+        return "Bad Content-Type."
+    
     return ""
 
+def test_get_page(pageName) -> str:
+    path = get_base_url() + pageName
+    req = requests.get(path)
+    if req.status_code != 200:
+        return "Bad status code."
+    
+    try:
+        with open(f'documents/{pageName}', 'r', encoding='utf-8') as file:
+            if req.text != file.read():
+                return "Bad content."
+    except FileNotFoundError:
+        return "File not found."
+    
+    if req.headers.get("Content-Length") != str(len(req.text)):
+        return "Bad Content-Length."
+    if req.headers.get("Content-Type") != "text/html; charset=UTF-8":
+        return "Bad Content-Type."
+    
+    return ""
 
 def test_get_dir_index() -> str:
     req = requests.get(get_base_url() + "a")
