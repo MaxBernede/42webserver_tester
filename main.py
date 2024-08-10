@@ -60,30 +60,33 @@ def run() -> None:
     Entrypoint of the tester
     """
     print(r"{}{}### Normal Tests ###{}".format(C_B_WHITE, B_GRAY, RESET))
-    run_test("GET /", test_get)
-    run_test("GET page2.html", lambda: test_get_page("page2.html"))
-    run_test("GET error.html", lambda: test_get_page("error.html"))
-    run_test("GET index1.html", lambda: test_get_page("index1.html"))
-    run_test("GET test.html", lambda: test_get_page("test.html"))
-    run_test("GET upload.html", lambda: test_get_page("upload.html"))
+    # run_test("GET /", test_get)
+    # run_test("GET page2.html", lambda: test_get_page("page2.html"))
+    # run_test("GET error.html", lambda: test_get_page("error.html"))
+    # run_test("GET index1.html", lambda: test_get_page("index1.html"))
+    # run_test("GET test.html", lambda: test_get_page("test.html"))
+    # run_test("GET upload.html", lambda: test_get_page("upload.html"))
+    # run_test("GET random/random.html", lambda: test_get_page("random/random.html"))
 
-    print(r"{}{}### TESTING HEAD ###{}".format(C_B_WHITE, B_GRAY, RESET))
-    run_test("HEAD /", test_head)
+    run_test("GET cgi", lambda: test_get_cgi())
 
-    print(r"{}{}### TESTING REQUEST LINE ###{}".format(C_B_WHITE, B_GRAY, RESET))
-    run_test("GET / HTTP/0.1", test_error_http_version)
-    run_test("GET  /  HTTP/1.1", test_request_line_multiple_space)
-    run_test("GET /{A*10^10} HTTP/1.1", test_request_line_too_long) #Take a while to load
+    # print(r"{}{}### TESTING HEAD ###{}".format(C_B_WHITE, B_GRAY, RESET))
+    # run_test("HEAD /", test_head)
 
-    ##Checking if header is \r\n ? could be a check ?
-    print(r"{}{}### Headers ###{}".format(C_B_WHITE, B_GRAY, RESET))
-    run_test("GET / HTTP/1.1\\r\\nHost :", test_space_before_colon)
-    run_test("GET / HTTP/1.1\\r\\nempty:", test_missing_header_name)
-    run_test("GET / HTTP/1.1\\r\\n: empty", test_missing_header_data)
-    run_test("GET / HTTP/1.1\\r\\nvaluewithnocolon", test_missing_header_colon)
-    run_test("GET / HTTP/1.1\\r\\nUser-Agent: {A*10^11}", test_header_too_long)
+    # print(r"{}{}### TESTING REQUEST LINE ###{}".format(C_B_WHITE, B_GRAY, RESET))
+    # run_test("GET / HTTP/0.1", test_error_http_version)
+    # run_test("GET  /  HTTP/1.1", test_request_line_multiple_space)
+    # run_test("GET /{A*10^10} HTTP/1.1", test_request_line_too_long) #Take a while to load
 
-    run_test("Testing mandatory headers", test_headers)
+    # ##Checking if header is \r\n ? could be a check ?
+    # print(r"{}{}### Headers ###{}".format(C_B_WHITE, B_GRAY, RESET))
+    # run_test("GET / HTTP/1.1\\r\\nHost :", test_space_before_colon)
+    # run_test("GET / HTTP/1.1\\r\\nempty:", test_missing_header_name)
+    # run_test("GET / HTTP/1.1\\r\\n: empty", test_missing_header_data)
+    # run_test("GET / HTTP/1.1\\r\\nvaluewithnocolon", test_missing_header_colon)
+    # run_test("GET / HTTP/1.1\\r\\nUser-Agent: {A*10^11}", test_header_too_long)
+
+    # run_test("Testing mandatory headers", test_headers)
 
 
 

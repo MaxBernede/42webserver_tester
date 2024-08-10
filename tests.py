@@ -42,7 +42,11 @@ def test_get() -> str:
 def test_get_page(pageName) -> str:
     path = get_base_url() + pageName
     req = requests.get(path)
-    if req.status_code != 200:
+    if pageName == "random/random.html":
+        pageName = "error/404.html"
+        if req.status_code != 404:
+            return "Bad status code."
+    elif req.status_code != 200:
         return "Bad status code."
     
     try:
@@ -57,6 +61,44 @@ def test_get_page(pageName) -> str:
     if req.headers.get("Content-Type") != "text/html; charset=UTF-8":
         return "Bad Content-Type."
     
+    return ""
+
+def test_get_cgi() -> str:
+    html_content = """<!DOCTYPE html>
+<html>
+<body>
+<h3>Hello !</h3>
+</body>
+</html>
+
+"""
+    req = requests.get(get_base_url() + "cgi/python.cgi")
+    # print(html_content)
+    # print(req.text)
+    if req.status_code != 200:
+        return "Bad status code."
+    
+    if req.text != html_content:
+        return "Bad content."
+    return ""
+
+def test_get_cgi_cookie() -> str:
+    html_content = """<!DOCTYPE html>
+<html>
+<body>
+<h3>Hello !</h3>
+</body>
+</html>
+
+"""
+    req = requests.get(get_base_url() + "cgi/python.cgi")
+    # print(html_content)
+    # print(req.text)
+    if req.status_code != 200:
+        return "Bad status code."
+    
+    if req.text != html_content:
+        return "Bad content."
     return ""
 
 def test_get_dir_index() -> str:
